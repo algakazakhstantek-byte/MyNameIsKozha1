@@ -8,10 +8,67 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #e6f7ff 0%, #fff0f5 100%);
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0fff0 100%);
             font-family: 'Arial', sans-serif;
             min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Фоновые элементы */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .bg-element {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 4em;
+        }
+        
+        .frog-logo {
+            top: 10%;
+            right: 10%;
+            font-size: 6em;
+            opacity: 0.15;
+        }
+        
+        .slingshot {
+            bottom: 20%;
+            left: 5%;
+            font-size: 5em;
+            transform: rotate(-30deg);
+        }
+        
+        .book {
+            top: 15%;
+            left: 5%;
+            font-size: 4em;
+        }
+        
+        .asyk {
+            bottom: 15%;
+            right: 15%;
+            font-size: 4em;
+        }
+        
+        .school {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+        }
+        
+        .child {
+            bottom: 10%;
+            left: 20%;
+            font-size: 4em;
         }
         
         .container {
@@ -19,6 +76,8 @@
             margin: 0 auto;
             padding: 40px 20px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         h1 {
@@ -29,11 +88,12 @@
         }
         
         .main-content {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin: 20px 0;
+            backdrop-filter: blur(10px);
         }
         
         .main-image {
@@ -43,6 +103,8 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .main-image img {
@@ -63,6 +125,8 @@
             margin: 30px 0;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            position: relative;
+            z-index: 2;
         }
         
         .start-button:hover {
@@ -82,6 +146,7 @@
             justify-content: space-around;
             align-items: center;
             backdrop-filter: blur(10px);
+            z-index: 3;
         }
         
         .author-link {
@@ -99,11 +164,55 @@
             font-size: 18px;
             font-weight: bold;
         }
+        
+        /* Анимация для фоновых элементов */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .bg-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .frog-logo {
+            animation-delay: 0s;
+        }
+        
+        .slingshot {
+            animation-delay: 1s;
+        }
+        
+        .book {
+            animation-delay: 2s;
+        }
+        
+        .asyk {
+            animation-delay: 3s;
+        }
+        
+        .school {
+            animation-delay: 4s;
+        }
+        
+        .child {
+            animation-delay: 5s;
+        }
     </style>
 </head>
 <body>
+    <!-- Фоновые элементы -->
+    <div class="bg-elements">
+        <div class="bg-element frog-logo">🐸</div>
+        <div class="bg-element slingshot">🎯</div>
+        <div class="bg-element book">📚</div>
+        <div class="bg-element asyk">🎲</div>
+        <div class="bg-element school">🏫</div>
+        <div class="bg-element child">👦</div>
+    </div>
+
     <div class="container">
-        <h1>Қазақ Тілі - 4-сынып</h1>
+        <h1>🐸 Қазақ Тілі - 4-сынып</h1>
         
         <div class="main-content">
             <div class="main-image">
@@ -114,7 +223,8 @@
             <a href="lessons.html" class="start-button">Сабақты бастау</a>
             
             <div style="margin-top: 20px; color: #666; font-style: italic;">
-                <p>"Менің атым Кожа" - Бердібек Соқпақбаев</p>
+                <p>"Менің атым Кожа" - Бердібек Ыдырысұлы Соқпақбаев шығармасы бойынша</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Басты кейіпкердің оқу жолы мен балалық шақ оқиғалары</p>
             </div>
         </div>
     </div>
