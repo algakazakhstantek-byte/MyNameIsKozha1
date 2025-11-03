@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Менің атым Кожа" сабағы - 4-сынып</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: clamp(1.5em, 4vw, 2.5em);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: clamp(0.9em, 2.5vw, 1.1em);
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            background: white;
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: clamp(1em, 3vw, 1.2em);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button.video {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .nav-button.theory {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            color: white;
+        }
+
+        .nav-button.test {
+            background: linear-gradient(45deg, #FFD93D, #FF9C3D);
+            color: white;
+        }
+
+        .content-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .video-description {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 15px;
+            font-size: clamp(0.9em, 2.5vw, 1.1em);
+        }
+
+        .theory-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .theory-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4ECDC4;
+        }
+
+        .theory-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: clamp(1.1em, 3vw, 1.3em);
+        }
+
+        .theory-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: clamp(0.9em, 2.5vw, 1em);
+        }
+
+        .book-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .test-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .test-card:hover {
+            border-color: #FFD93D;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 217, 61, 0.3);
+        }
+
+        .test-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: clamp(1em, 3vw, 1.2em);
+        }
+
+        .test-card p {
+            color: #666;
+            font-size: clamp(0.85em, 2.5vw, 0.95em);
+            margin-bottom: 15px;
+        }
+
+        .test-platform {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+            transform: translateX(-5px);
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 15px;
+            }
+            
+            .theory-content,
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .nav-button {
+                padding: 15px;
+            }
+            
+            .test-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <div class="header">
+            <h1>🐸 "Менің атым Кожа" сабағы</h1>
+            <p>Е. Сокланбаевтың шығармасы бойынша</p>
+        </div>
+
+        <!-- Кнопки навигации -->
+        <div class="nav-buttons">
+            <button class="nav-button video" onclick="showSection('video')">
+                🎬 Біз киноны қараймыз
+            </button>
+            <button class="nav-button theory" onclick="showSection('theory')">
+                📚 Кітаппен теория
+            </button>
+            <button class="nav-button test" onclick="showSection('tests')">
+                📝 Тесттер мен тапсырмалар
+            </button>
+        </div>
+
+        <!-- Секция видео -->
+        <div id="video" class="content-section">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/yQa1xX0FKPs" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-description">
+                <p>"Менің атым Кожа" шығармасы бойынша түсіндірме фильм</p>
+                <p>🎥 Балаларға арналған әдебиет сабағы</p>
+            </div>
+        </div>
+
+        <!-- Секция теории -->
+        <div id="theory" class="content-section">
+            <div class="theory-content">
+                <div class="theory-card">
+                    <div class="book-icon">📖</div>
+                    <h3>Шығарма туралы</h3>
+                    <p>"Менің атым Кожа" - бұл Е. Сокланбаевтың балаларға арналған әйгілі повесі. Шығармада басты кейіпкер Кожаның мектептегі, үйдегі өмірі, оның достарымен қарым-қатынасы суреттеледі.</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="book-icon">👦</div>
+                    <h3>Басты кейіпкерлер</h3>
+                    <p><strong>Кожа</strong> - басты кейіпкер, қызыққыш, зейінді бала<br>
+                    <strong>Құрманбек</strong> - Кожаның досы<br>
+                    <strong>Мұғалім</strong> - балаларға жақын, түсінікті мұғалім</p>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="book-icon">🎯</div>
+                    <h3>Негізгі тақырыптар</h3>
+                    <p>• Достық пен ынтымақтастық<br>
+                    • Білімнің маңызы<br>
+                    • Өсек пен өтіріктен аулақ болу<br>
+                    • Ұлттық дәстүрлер мен ойындар</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция тестов -->
+        <div id="tests" class="content-section">
+            <div class="tests-grid">
+                <a href="https://quizlet.com/kz/577116941/%D2%9B%D0%B0%D0%B7%D0%B0%D2%9B-%D3%99%D0%B4%D0%B5%D0%B1%D0%B8%D0%B5%D1%82%D1%96-%D0%BC%D0%B5%D0%BD%D1%96%D2%A3-%D0%B0%D1%82%D1%8B%D0%BC-%D2%9B%D0%BE%D0%B6%D0%B0-flash-cards/?x=1jqY" 
+                   class="test-card" target="_blank">
+                    <h3>📋 1-тест: Сөздік қор</h3>
+                    <p>Шығармадағы негізгі сөздер мен түсініктер</p>
+                    <span class="test-platform">Quizlet - Карточкалар</span>
+                </a>
+
+                <a href="https://learningapps.org/29493876" 
+                   class="test-card" target="_blank">
+                    <h3>🎮 2-тест: Интерактивті тапсырма</h3>
+                    <p>Оқиғаларды дұрыс ретпен орналастыру</p>
+                    <span class="test-platform">LearningApps</span>
+                </a>
+
+                <a href="https://onlinetestpad.com/kz/test/1090080-meniң-atym-қozha-test-zhinaғy" 
+                   class="test-card" target="_blank">
+                    <h3>✏️ 3-тест: Толық тест жинағы</h3>
+                    <p>Барлық тақырыптарды қамтитын көптеген сұрақтар</p>
+                    <span class="test-platform">OnlineTestPad</span>
+                </a>
+
+                <a href="https://wordwall.net/ru/resource/11123808" 
+                   class="test-card" target="_blank">
+                    <h3>🎯 4-тест: Сөздермен жұмыс</h3>
+                    <p>Сөздерді дұрыс топтастыру және жұмыс</p>
+                    <span class="test-platform">Wordwall</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Кнопка возврата -->
+        <a href="lessons.html" class="back-button">
+            ← Сабақтар тізіміне оралу
+        </a>
+    </div>
+
+    <script>
+        // Функция для показа выбранной секции
+        function showSection(sectionId) {
+            // Скрываем все секции
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Показываем выбранную секцию
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+            
+            // Прокручиваем к секции на мобильных устройствах
+            if (window.innerWidth < 768) {
+                activeSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // По умолчанию показываем видео секцию
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('video');
+        });
+    </script>
+</body>
+</html>
